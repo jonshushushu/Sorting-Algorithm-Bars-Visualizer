@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
-import {getBubbleSortAnimations, getMergeSortAnimations} from '../SortingAlgorithm/SortingAlgorithm.js';
+import {getBubbleSortAnimations, getInsertionSortAnimations, getMergeSortAnimations} from '../SortingAlgorithm/SortingAlgorithm.js';
 import './SortingVisualizer.css';
 
-const BUBBLE_ANIMATION_SPEED = .3;
+const BUBBLE_ANIMATION_SPEED = .8;
 const MERGE_ANIMATION_SPEED = 3
 
 
@@ -10,7 +10,7 @@ export default class SortingVisualizer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { array: [], };
+        this.state = { array: [], isAnimating: false};
     }
 
     componentDidMount() {
@@ -26,12 +26,7 @@ export default class SortingVisualizer extends React.Component {
     }
     
     mergeSort() {
-
-        // window.addEventListener("click", (e) => {
-        //     e.stopPropagation();
-        //     e.stopImmediatePropagation();
-        //     e.preventDefault();
-        //   }, true);
+        this.setState({isAnimating: true});
 
         const animations = getMergeSortAnimations(this.state.array);
         for (let i = 0; i < animations.length; i++) {
@@ -54,15 +49,13 @@ export default class SortingVisualizer extends React.Component {
                 }, i * MERGE_ANIMATION_SPEED);
             }
         }
-        // window.removeEventListener("click", (e) => {
-        //     e.stopPropagation();
-        //     e.stopImmediatePropagation();
-        //     e.preventDefault();
-        //   }, true);
 
+        setTimeout(() => this.setState({isAnimating: false}), animations.length * MERGE_ANIMATION_SPEED)
+        
     }
 
     bubbleSort() {
+        this.setState({isAnimating: true});
         const animations = getBubbleSortAnimations(this.state.array);
         for(let i = 0; i < animations.length; i++) {
                 const arrayBars = document.getElementsByClassName('array-bar');
@@ -103,6 +96,43 @@ export default class SortingVisualizer extends React.Component {
                 
             
         }
+        setTimeout(() => this.setState({isAnimating: false}), animations.length * BUBBLE_ANIMATION_SPEED);
+    }
+
+    insertionSort() {
+        this.setState({isAnimating: true});
+        const animations = getInsertionSortAnimations(this.state.array);
+        for(let i = 0; i < animations.length; i++) {
+                const arrayBars = document.getElementsByClassName('array-bar');
+                if(animations[i][1] === 'on') {
+                    const barIndex = animations[i][0];
+                    const barStyle = arrayBars[barIndex].style;
+                    setTimeout(() => {
+                        barStyle.backgroundColor = 'purple';
+                    }, i * BUBBLE_ANIMATION_SPEED);
+                }
+                if(animations[i][1] === 'off') {
+                    const barIndex = animations[i][0];
+                    const barStyle = arrayBars[barIndex].style;
+                    setTimeout(() => {
+                        barStyle.backgroundColor = 'yellow';
+                    }, i * BUBBLE_ANIMATION_SPEED);
+                }
+                else {
+                    const barIndex = animations[i][0];
+                    const barValue = animations[i][2];
+                    const barStyle = arrayBars[barIndex].style;
+                    setTimeout(() => {
+                        barStyle.height = `${barValue}px`;
+                        }, i * BUBBLE_ANIMATION_SPEED);
+                }
+                    
+            //for each loop    
+
+                
+            
+        }
+        setTimeout(() => this.setState({isAnimating: false}), animations.length * BUBBLE_ANIMATION_SPEED)
     }
 
 
@@ -124,9 +154,10 @@ export default class SortingVisualizer extends React.Component {
                 ))}
 
 
-                <button onClick={() =>{ return this.resetArray()}}>Generate New Array</button>
-                <button onClick={() =>{ return this.mergeSort()}}>Merge Sort</button>
-                <button onClick={() =>{ return this.bubbleSort()}}>Bubble Sort</button>
+                <button disabled={this.state.isAnimating} onClick={() => this.resetArray()}>Generate New Array</button>
+                <button disabled={this.state.isAnimating} onClick={() => this.mergeSort()}>Merge Sort</button>
+                <button disabled={this.state.isAnimating} onClick={() => this.bubbleSort()}>Bubble Sort</button>
+                <button disabled={this.state.isAnimating} onClick={() =>this.insertionSort()}>Insertion Sort</button>
                 
             </div>
 
