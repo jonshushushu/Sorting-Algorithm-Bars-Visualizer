@@ -15,8 +15,3 @@ function App() {
 export default App;
 
 
-/* how to make project differnt:
-add a button to change color
-add more algorithims 
-make it so that the screen dimensions create the numbers of bar and dimensions of bar
-*/
