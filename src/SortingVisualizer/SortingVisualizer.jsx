@@ -164,12 +164,15 @@ export default class SortingVisualizer extends React.Component {
                         height: `${value}px`
                     }}></div>
                 ))}
+                <div className='display'>
+                <button className='button1' disabled={this.state.isAnimating} onClick={() => this.resetArray()}>Generate New Array</button>
+                <button className='button2' disabled={this.state.isAnimating} onClick={() => this.mergeSort()}>Merge Sort</button>
+                <button className='button3' disabled={this.state.isAnimating} onClick={() => this.bubbleSort()}>Bubble Sort</button>
+                <button className='button4' disabled={this.state.isAnimating} onClick={() => this.insertionSort()}>Insertion Sort</button>
+                </div>
+                
 
-
-                <button disabled={this.state.isAnimating} onClick={() => this.resetArray()}>Generate New Array</button>
-                <button disabled={this.state.isAnimating} onClick={() => this.mergeSort()}>Merge Sort</button>
-                <button disabled={this.state.isAnimating} onClick={() => this.bubbleSort()}>Bubble Sort</button>
-                <button disabled={this.state.isAnimating} onClick={() => this.insertionSort()}>Insertion Sort</button>
+                
                 
             </div>
 
