@@ -1,3 +1,5 @@
+/*This class executes the sorting animation based off a series of steps provided by the
+Sorting Algorithm class. This class renders and places the visual elements. */
 import React, { PureComponent } from 'react';
 import {getBubbleSortAnimations, getInsertionSortAnimations, getMergeSortAnimations} from '../SortingAlgorithm/SortingAlgorithm.js';
 import './SortingVisualizer.css';
@@ -80,7 +82,7 @@ export default class SortingVisualizer extends React.Component {
                     barTwoStyle.backgroundColor = 'green';
                 }, i * BUBBLE_ANIMATION_SPEED);
             }
-            else{
+            else {
                 if(i.length === 2){
                     const [barOneIdx, barTwoIdx] = animations[i];
                     const barOneStyle = arrayBars[barOneIdx].style;
@@ -91,7 +93,7 @@ export default class SortingVisualizer extends React.Component {
                     }, i * BUBBLE_ANIMATION_SPEED);
                     
                 }
-                else{
+                else {
                     const [barOneIdx, barTwoIdx, newHeightOne, newHeightTwo] = animations[i];
                     const barOneStyle = arrayBars[barOneIdx].style;
                     const barTwoStyle = arrayBars[barTwoIdx].style;
