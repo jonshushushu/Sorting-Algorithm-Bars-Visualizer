@@ -74,6 +74,7 @@ export default class SortingVisualizer extends React.Component {
         for(let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
             if(i % 2 === 0){
+                //
                 const [barOneIdx, barTwoIdx] = animations[i];
                 const barOneStyle = arrayBars[barOneIdx].style;
                 const barTwoStyle = arrayBars[barTwoIdx].style;
@@ -81,8 +82,7 @@ export default class SortingVisualizer extends React.Component {
                     barOneStyle.backgroundColor = 'purple';
                     barTwoStyle.backgroundColor = 'green';
                 }, i * BUBBLE_ANIMATION_SPEED);
-            }
-            else {
+            } else {
                 if(i.length === 2){
                     const [barOneIdx, barTwoIdx] = animations[i];
                     const barOneStyle = arrayBars[barOneIdx].style;
@@ -92,8 +92,7 @@ export default class SortingVisualizer extends React.Component {
                         barTwoStyle.backgroundColor = 'yellow';
                     }, i * BUBBLE_ANIMATION_SPEED);
                     
-                }
-                else {
+                } else {
                     const [barOneIdx, barTwoIdx, newHeightOne, newHeightTwo] = animations[i];
                     const barOneStyle = arrayBars[barOneIdx].style;
                     const barTwoStyle = arrayBars[barTwoIdx].style;
@@ -119,20 +118,21 @@ export default class SortingVisualizer extends React.Component {
         for(let i = 0; i < animations.length; i++) {
                 const arrayBars = document.getElementsByClassName('array-bar');
                 if(animations[i][1] === 'on') {
+                    //if the item has an on tag, then the bar in reference will turn purple indicating it 
+                    //being compared
                     const barIndex = animations[i][0];
                     const barStyle = arrayBars[barIndex].style;
                     setTimeout(() => {
                         barStyle.backgroundColor = 'purple';
                     }, i * BUBBLE_ANIMATION_SPEED);
-                }
-                if(animations[i][1] === 'off') {
+                } else if(animations[i][1] === 'off') {
                     const barIndex = animations[i][0];
                     const barStyle = arrayBars[barIndex].style;
                     setTimeout(() => {
                         barStyle.backgroundColor = 'yellow';
                     }, i * BUBBLE_ANIMATION_SPEED);
-                }
-                else {
+                } else {
+                    //if there on/off tag, then we have found where to insert our key value
                     const barIndex = animations[i][0];
                     const barValue = animations[i][2];
                     const barStyle = arrayBars[barIndex].style;
@@ -140,11 +140,6 @@ export default class SortingVisualizer extends React.Component {
                         barStyle.height = `${barValue}px`;
                         }, i * BUBBLE_ANIMATION_SPEED);
                 }
-                    
-            //for each loop    
-
-                
-            
         }
         //setTimeout(() => this.setState({isAnimating: false}), animations.length * BUBBLE_ANIMATION_SPEED);
     }
