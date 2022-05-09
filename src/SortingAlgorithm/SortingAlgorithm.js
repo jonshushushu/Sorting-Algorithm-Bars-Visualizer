@@ -1,6 +1,6 @@
 /* This class hosts the various sorting algoirthm and at each 'step' in the comparisons,
-pushes adds to an animations array. The each item in the animations array is used by the visualizer class
-to know which bars needs to be highlighted are have their height values changed */
+pushes adds to an animations array. Then each item in the animations array is used by the visualizer class
+to know which bars needs to be highlighted or have their height values changed */
 
 export function getBubbleSortAnimations(inputArr) {
 	const animations = [];
